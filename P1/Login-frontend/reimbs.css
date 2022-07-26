@@ -1,0 +1,8 @@
+table, th, tr{
+    border: 2px solid blue;
+}
+
+#label{
+    display: block;
+    text-align: center;
+}

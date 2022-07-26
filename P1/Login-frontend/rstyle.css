@@ -1,0 +1,18 @@
+.text-centered{
+    font-size: 40px;
+    transform: translate(0%, 40%);
+    text-align: center;
+    border: 15px solid green;
+    padding: 20px;
+    width: 20vw;
+    height: auto;
+    margin: auto;
+}
+
+#label{
+    font-size: 30px;
+}
+
+.field{
+    font-size: 20px;
+}
