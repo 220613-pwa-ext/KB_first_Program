@@ -11,21 +11,29 @@
     <h1 class="text-centered">Dashboard </h1>
     <br>
     <b><label id="label"> Reimbursements: </b></label>
+    <b>
+        <button type="button" id="create-reimb-btn">Create Request</button>
+    </b>
     <p>
         <table id="table" name="reimbs_table" style="width:100%">
             <tr id="trow">
                 <th id="tamount">Amount</th>
                 <th id="tsubmit">Time Submitted</th>
                 <th id="tresolved">Time Resolved</th>
-                <th id="tstatus">Status</th>
+                <th id="tstatus">Status  
+                    <button type="button" id="filter-btn">↑</button>
+                    <button type="button" id="filter2-btn">↓</button>
+                
+                </th>
+
                 <th id="ttype">Type</th>
                 <th id="tdescription">Description</th>
                 <th id="treceipt">Receipt</th>
                 <th id="tauthor">Author</th>
                 <th id="tresolver">Resolver</th>
             </tr>
-            <tbody>
-                
+            <tbody id="tdata">
+
             </tbody>
         </table>
     </p>

@@ -1,4 +1,6 @@
 let user_id = localStorage.getItem("id");
+let filter_btn = document.getElementById("filter-btn");
+let filter2_btn = document.getElementById("filter2-btn");
 
 document.addEventListener('DOMContentLoaded', async () =>{ 
     let res = await fetch(`http://127.0.0.1:5050/employee_reimbs/${user_id}`, {
@@ -25,7 +27,8 @@ document.addEventListener('DOMContentLoaded', async () =>{
         }
     });
 
-
+filter_btn.addEventListener("click", sortListup);
+filter2_btn.addEventListener("click", sortListdown)
 function addReimbToTable(reimb){
     let reimbTbodyElement = document.querySelector('#table tbody');
 
@@ -41,6 +44,7 @@ function addReimbToTable(reimb){
         time_resolved.innerHtml = reimb.resolved;
     }
     let statu = document.createElement('td');
+    statu.setAttribute('id', 'status');
     statu.innerHTML = reimb.status;
     let ty = document.createElement('td');
     ty.innerHTML = reimb.type;
@@ -70,4 +74,61 @@ function addReimbToTable(reimb){
     row.appendChild(auth);
     row.appendChild(resol);
     reimbTbodyElement.appendChild(row);
+}
+
+function sortListup(){
+    let table, rows, switching, sswitch, i, dir;
+    switching = true;
+    table = document.getElementById("table");
+    dir = "asc";
+    while(switching){
+        switching = false;
+        rows = table.rows;
+        for(i=1;i<(rows.length-1);i++){
+            sswitch=false;
+            x = rows[i].cells[3];
+            y = rows[i+1].cells[3];
+            if(dir == "asc"){
+                if(x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()){
+                    sswitch=true;
+                    break;
+                }
+            }else if(dir =="desc"){
+                if(x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()){
+                    sswitch=true;
+                    break;
+                }
+            }
+        }
+        if(sswitch){
+            rows[i].parentNode.insertBefore(rows[i+1], rows[i]);
+            switching = true;
+        }
+    }
+
+}
+
+
+function sortListdown(){
+    let table, rows, switching, sswitch, i, dir;
+    switching = true;
+    table = document.getElementById("table");
+    while(switching){
+        switching = false;
+        rows = table.rows;
+        for(i=1;i<(rows.length-1);i++){
+            sswitch=false;
+            x = rows[i].cells[3];
+            y = rows[i+1].cells[3];
+                if(x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()){
+                    sswitch=true;
+                    break;
+                }
+        }
+        if(sswitch){
+            rows[i].parentNode.insertBefore(rows[i+1], rows[i]);
+            switching = true;
+        }
+    }
+
 }
