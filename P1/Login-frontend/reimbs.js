@@ -1,6 +1,9 @@
 let user_id = localStorage.getItem("id");
 let filter_btn = document.getElementById("filter-btn");
 let filter2_btn = document.getElementById("filter2-btn");
+let table = document.getElementById("table");
+let rows = table.rows;
+let modal_btn = document.getElementById("Approve/Deny-btn");
 
 document.addEventListener('DOMContentLoaded', async () =>{ 
     let res = await fetch(`http://127.0.0.1:5050/employee_reimbs/${user_id}`, {
@@ -12,23 +15,15 @@ document.addEventListener('DOMContentLoaded', async () =>{
                 addReimbToTable(JSON.parse(JSON.stringify(dat['reimbs'][l])))
             }
         });
-
-     if (res.status ==400){
-        let loginErrorMessage = document.getElementById('login-error-messages')
-        loginErrorMessage.innerHTML = '';
-        let errorMessages = data2.messages;
-        for(let errorMessage of errorMessages) {
-            let errorElement = document.createElement('p');
-            errorElement.innerHTML = errorMessage;
-            errorElement.style.color = 'red';
-            errorElement.style.fontweight = 'bold';
-            loginErrorMessage.appendChild(errorElement);
-            }
-        }
     });
 
+modal_btn.onclick=function(){
+    modal_btn.style.display = "block";
+}
+
 filter_btn.addEventListener("click", sortListup);
-filter2_btn.addEventListener("click", sortListdown)
+filter2_btn.addEventListener("click", sortListdown);
+
 function addReimbToTable(reimb){
     let reimbTbodyElement = document.querySelector('#table tbody');
 
@@ -110,12 +105,10 @@ function sortListup(){
 
 
 function sortListdown(){
-    let table, rows, switching, sswitch, i, dir;
+    let switching, sswitch, i, dir;
     switching = true;
-    table = document.getElementById("table");
     while(switching){
         switching = false;
-        rows = table.rows;
         for(i=1;i<(rows.length-1);i++){
             sswitch=false;
             x = rows[i].cells[3];

@@ -3,6 +3,7 @@ from dao.user_dao import UserDao
 from exception.login import LoginException
 from exception.user import UserException
 from exception.registration import RegistrationException
+from exception.usernotfound import UserNotFoundException
 
 
 class UserService:
@@ -161,3 +162,12 @@ class UserService:
             for reimbs in list_of_reimbs:
                 list_of_reimbs_dictionary.append(reimbs.to_dict())
             return list_of_reimbs_dictionary
+
+
+    def update_reimb_by_id(self, reimb_id, stat):
+        update_reimb_object = self.user_dao.update_reimb_by_id(reimb_id, stat)
+
+        if update_reimb_object is None:
+            raise UserNotFoundException(f"Customer with id {reimb_id} was not found")
+
+        return update_reimb_object.to_dict()

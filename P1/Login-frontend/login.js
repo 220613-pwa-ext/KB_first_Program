@@ -20,17 +20,4 @@ if(usernameInput){
         if(res.status==200){
             localStorage.setItem("id", data['u_id']);
             window.location.href = 'reimbs.html';
-        }
-        else if (res.status ==400){
-            let loginErrorMessage = document.getElementById('login-error-messages')
-            loginErrorMessage.innerHTML = '';
-            let errorMessages = data.messages;
-            for(let errorMessage of errorMessages) {
-                let errorElement = document.createElement('p');
-                errorElement.innerHTML = errorMessage;
-                errorElement.style.color = 'red';
-                errorElement.style.fontweight = 'bold';
-                loginErrorMessage.appendChild(errorElement);
-                }
-        }
-        })};
+        }})};
