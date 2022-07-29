@@ -1,9 +1,6 @@
 from flask import Blueprint, request, session
-
 from exception.login import LoginException
 from exception.registration import RegistrationException
-from exception.usernotfound import UserNotFoundException
-from model.reimbs import Reimb
 from model.user import User
 from services.user_service import UserService
 
@@ -78,31 +75,3 @@ def add_user():
 
     return added_user, 200
 
-
-@uc.route('/employee_reimbs/<u_id>')
-def get_reimb_by_employee_id(u_id):
-    try:
-        user = user_service.get_reimb_by_employee_id(int(u_id))
-    except RegistrationException as e:
-        return {
-            "messages": e.messages
-        }, 400
-    if user is None:
-        user_r = user_service.get_reimb_by_manager_id(u_id)
-        return {
-                   "reimbs": user_r
-               }, 200
-    return {
-              "reimbs": user
-           }, 200
-
-
-@uc.route('/employee_reimbs/<reimb_id>/<stat>', methods=['PUT'])
-def update_reimb_by_id(reimb_id, stat):
-    try:
-        user = user_service.update_reimb_by_id(reimb_id, stat)
-        return user
-    except UserNotFoundException as e:
-        return {
-            "message": str(e)
-        }, 404

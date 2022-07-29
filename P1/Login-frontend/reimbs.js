@@ -3,7 +3,6 @@ let filter_btn = document.getElementById("filter-btn");
 let filter2_btn = document.getElementById("filter2-btn");
 let table = document.getElementById("table");
 let rows = table.rows;
-let modal_btn = document.getElementById("Approve/Deny-btn");
 
 document.addEventListener('DOMContentLoaded', async () =>{ 
     let res = await fetch(`http://127.0.0.1:5050/employee_reimbs/${user_id}`, {
@@ -17,9 +16,6 @@ document.addEventListener('DOMContentLoaded', async () =>{
         });
     });
 
-modal_btn.onclick=function(){
-    modal_btn.style.display = "block";
-}
 
 filter_btn.addEventListener("click", sortListup);
 filter2_btn.addEventListener("click", sortListdown);

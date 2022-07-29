@@ -1,0 +1,2 @@
+class ReimbNotFoundException(Exception):
+    pass
