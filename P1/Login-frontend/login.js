@@ -19,5 +19,8 @@ if(usernameInput){
             let data = await res.json();
         if(res.status==200){
             localStorage.setItem("id", data['u_id']);
-            window.location.href = 'reimbs.html';
+            if(data['role']=="employee"){
+                window.location.href = 'reimbse.html';
+            }else if(data['role']=="finance_manager")
+                window.location.href = 'reimbsf.html';
         }})};
